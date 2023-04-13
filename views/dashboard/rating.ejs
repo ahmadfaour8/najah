@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="dashboed.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Rander All Elements Normally -->
+    <link rel="stylesheet" href="../css/normalize.css" />
+    <!-- Font Awesome library -->
+    <link rel="stylesheet" href="../css/all.min.css" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap"
+      rel="stylesheet" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="main">
+      <div class="container">
+        <img src="../img/NAJAH.png" alt="" width="70px" />
+        <div class="link">
+          <span class="icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <ul>
+            <li dir="rtl"><a href="/dashboard/rating">التصنيفات</a></li>
+            <li dir="rtl"><a href="/dashboard/employee">الموظفين</a></li>
+            <li dir="rtl"><a href="/dashboard/ads">الاعلانات</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="head">
+      <div class="container">
+        <h1 dir="rtl">التصنيفات</h1>
+        <div class="add">
+          <button id="addRating">+ اضافه صنف</button>
+        </div>
+      </div>
+      <div dir="rtl" class="rating">
+        <div class="container">
+          <% rating.forEach(element => { %>
+          <div class="content">
+            <img src="../img/<%= element.image %>" alt="" />
+            <h3><%= element.name %></h3>
+            <div>
+              <form action="/dashboard/deleteRating" method="post" id="deleteRating">
+                <input type="hidden" name="RateId" value="<%= element.id %>" />
+                <button><i class="fa-solid fa-trash-can"></i></button>
+              </form>
+              <button
+                onclick="runHTML('<%= element.name %>', '<%= element.image %>', '<%= element.id %>')"
+                id="editRating">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.getElementById("addRating").addEventListener("click", function () {
+        (async () => {
+          const { value: formValues } = await Swal.fire({
+            html:
+              '<form action="/dashboard/rating" method="post" >' +
+              '<div style="display: flex;justify-content: flex-start;flex-direction: column;">' +
+              '<label for="name" style="font-size: 20px; margin:0px">الاسم</label>' +
+              '<input name="name" id="name" class="swal2-input required" style="margin-top:5px;">' +
+              "<br>" +
+              '<label for="photo" style="font-size: 20px; margin:0px;">الصورة</label>' +
+              '<input name="image" type="text" id="photo" class="swal2-input" style="margin-top:5px;">' +
+              "<br>" +
+              '<input type="submit" id="subm" class="swal2-input" style="margin-top:5px;background-color: #165baa; color:white">' +
+              "</div>" +
+              "</form>",
+            showConfirmButton: false,
+          });
+        })();
+      });
+      // document.getElementById("editRating").addEventListener("click", function () {
+      //   (async () => {
+      //     const { value: formValues } = await Swal.fire({
+      //       html:
+      //         '<form action="/dashboard/editRating" method="post" >' +
+      //         '<div style="display: flex;justify-content: flex-start;flex-direction: column;">' +
+      //         '<label for="name" style="font-size: 20px; margin:0px">الاسم</label>' +
+      //         '<input name="name" id="name" value="" class="swal2-input required" style="margin-top:5px;">' +
+      //         "<br>" +
+      //         '<label for="photo" style="font-size: 20px; margin:0px;">الصورة</label>' +
+      //         '<input name="image" type="text" id="photo" class="swal2-input" style="margin-top:5px;">' +
+      //         "<br>" +
+      //         '<input type="submit" id="subm" class="swal2-input" style="margin-top:5px;background-color: #165baa; color:white">' +
+      //         "</div>" +
+      //         "</form>",
+      //       showConfirmButton: false,
+      //     });
+      //   })();
+      // });
+      function runHTML(name, image, id) {
+        document.write(
+          '<div style="width: 50%;">' +
+            '<form action="/dashboard/editRating" method="post" >' +
+            '<div style="display: flex;justify-content: flex-start;flex-direction: column;">' +
+            '<label for="name" style="font-size: 20px; margin:0px">الاسم</label>' +
+            `<input name="name" id="name" value="${name}" class="swal2-input required" style="margin-top:5px;">` +
+            `<input name="RateId" value="${id}" hidden class="swal2-input required" style="margin-top:5px;">` +
+            "<br>" +
+            '<label for="photo" style="font-size: 20px; margin:0px;">الصورة</label>' +
+            `<input name="image" type="text" id="photo" value="${image}" class="swal2-input" style="margin-top:5px;">` +
+            "<br>" +
+            '<input type="submit" id="subm" class="swal2-input" style="margin-top:5px;background-color: #165baa; color:white">' +
+            "</div></form></div>",
+        );
+      }
+    </script>
+  </body>
+</html>

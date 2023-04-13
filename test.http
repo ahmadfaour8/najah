@@ -1,0 +1,8 @@
+POST http://localhost:3000/dashboard/editRating
+Content-Type: application/json
+
+{
+    "RateId": "64309ba59c7110fd803501d7",
+    "name": "jalal",
+    "image": "team-2.jpg"
+}

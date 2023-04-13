@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Rander All Elements Normally -->
+    <link rel="stylesheet" href="../css/normalize.css" />
+    <!-- Font Awesome library -->
+    <link rel="stylesheet" href="../css/all.min.css" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap"
+      rel="stylesheet" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="main">
+      <div class="container">
+        <img src="../img/NAJAH.png" alt="" width="70px" />
+        <div class="link">
+          <span class="icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <ul>
+            <li dir="rtl"><a href="/dashboard/rating">التصنيفات</a></li>
+            <li dir="rtl"><a href="/dashboard/employee">الموظفين</a></li>
+            <li dir="rtl"><a href="/dashboard/ads">الاعلانات</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="head">
+      <div class="container">
+        <h1 dir="rtl">الاعلانات</h1>
+        <div class="add">
+          <button id="ads">+ اضافه اعلان</button>
+        </div>
+      </div>
+    </div>
+    <div class="ads">
+      <div dir="rtl" class="table">
+        <table>
+          <thead>
+            <tr>
+              <th>الاسم الشركه</th>
+              <th>الوصف</th>
+              <th>التاريخ</th>
+              <th>الصوره</th>
+              <th>الاعدادت</th>
+            </tr>
+          </thead>
+          <% ads.forEach(element => { %>
+          <tr>
+            <td><h3><%= element.companyName %></h3></td>
+            <td><p><%= element.description %></p></td>
+            <td><%= element.date %></td>
+            <td><img src="../img/<%= element.image %>" /></td>
+            <td>
+              <div>
+                <form action="/dashboard/deleteAds" method="post" id="deleteAds">
+                  <input type="hidden" name="adsId" value="<%= element.id %>" />
+                  <button><i class="fa-solid fa-trash-can"></i></button>
+                </form>
+                <button
+                  onclick="runHTML('<%= element.companyName %>', '<%= element.description%>', '<%= element.date %>', '<%= element.image %>', '<%= element.id %>')"
+                  id="editEmp">
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <% }) %>
+        </table>
+      </div>
+    </div>
+    <script>
+      document.getElementById("ads").addEventListener("click", function () {
+        (async () => {
+          const { value: formValues } = await Swal.fire({
+            html:
+              '<form action="" method="post">' +
+              '<div style="display: flex;justify-content: flex-start;flex-direction: column;">' +
+              '<label for="name" style="font-size: 20px; margin:0px">الاسم الشركه</label>' +
+              '<input id="name" name="companyName" class="swal2-input required" style="margin-top:5px;">' +
+              "<br>" +
+              '<label for="description" style="font-size: 20px; margin:0px" >الوصف</label>' +
+              '<input id="description" name="description" class="swal2-input"  style="margin-top:5px;">' +
+              "<br>" +
+              '<label for="date" style="font-size: 20px; margin:0px">التاريخ</label>' +
+              '<input type="date" id="date" name="date" class="swal2-input" style="margin-top:5px;">' +
+              "<br>" +
+              '<label for="photo" style="font-size: 20px; margin:0px;">الصورة</label>' +
+              '<input type="text" id="photo" name="image" class="swal2-input" style="margin-top:5px;">' +
+              "<br>" +
+              '<input type="submit" id="subm" class="swal2-input" style="margin-top:5px;background-color: #165baa; color:white">' +
+              "</div>" +
+              "</form>",
+            showConfirmButton: false,
+          });
+        })();
+      });
+      function runHTML(companyName, description, date, image, id) {
+        document.write(
+          '<form action="/dashboard/editAds" method="post">' +
+            '<div style="display: flex;justify-content: flex-start;flex-direction: column;">' +
+            '<label for="name" style="font-size: 20px; margin:0px">الاسم الشركه</label>' +
+            `<input id="name" name="companyName" value="${companyName}" class="swal2-input required" style="margin-top:5px;">` +
+            "<br>" +
+            `<input name="adsId" value="${id}" hidden class="swal2-input required" style="margin-top:5px;">` +
+            '<label for="description" style="font-size: 20px; margin:0px" >الوصف</label>' +
+            `<input id="description" name="description" value="${description}" class="swal2-input"  style="margin-top:5px;">` +
+            "<br>" +
+            '<label for="date" style="font-size: 20px; margin:0px">التاريخ</label>' +
+            `<input type="date" id="date" name="date" value="${date}" class="swal2-input" style="margin-top:5px;">` +
+            "<br>" +
+            '<label for="photo" style="font-size: 20px; margin:0px;">الصورة</label>' +
+            `<input type="text" id="photo" name="image" value="${image}" class="swal2-input" style="margin-top:5px;">` +
+            "<br>" +
+            '<input type="submit" id="subm" class="swal2-input" style="margin-top:5px;background-color: #165baa; color:white">' +
+            "</div>" +
+            "</form>",
+        );
+      }
+    </script>
+  </body>
+</html>

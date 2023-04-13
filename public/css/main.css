@@ -1,0 +1,334 @@
+:root{
+    --main_color: red
+}
+body{
+    font-family: 'Cairo', sans-serif;
+}
+.container{
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Small */
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+/* Medium */
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+/* Large */
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px;
+    }
+}
+.main {
+    padding:5px ;
+    background-color: #F6F1F1;
+}
+.main .container {
+    display: flex;
+    justify-content:space-between ;
+    align-items: center;
+}
+.main .link {
+    position: relative;
+}
+.main .link:hover .icon span:nth-child(2) {
+    width: 100%;
+}
+.main .container .link .icon {
+    width: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+} 
+.main .link .icon span {
+    background-color: #165baa;
+    margin-bottom: 5px;
+    height: 3px;
+}
+.main .link .icon span:first-child {
+    width: 100%;
+}
+.main .link .icon span:nth-child(2) {
+    width: 60%;
+    transition: .4s;
+}
+.main .link .icon span:last-child {
+    width: 100%;
+}
+.main .link ul {
+    background-color:#F6F1F1;
+    list-style: none;
+    padding: 0px;
+    margin:0px;
+    position: absolute;
+    right:0px;
+    min-width: 200px;
+    top:calc(100% + 10px);
+    display: none; 
+    z-index: 1;
+
+}
+.main .link ul::before {
+    content:""; 
+    border-width:10px;
+    border-style: solid ;
+    border-color: transparent transparent #F6F1F1 transparent;
+    position: absolute;
+    top:-20px;
+    right: 5px;
+} 
+.main .link:hover ul {
+    display: block;
+}  
+.main .link ul li  a{
+    display: block;
+    padding:20px;
+    text-decoration: none;
+    color :#333;
+    transition: .3s;
+}
+.main .link ul li:not(:last-child) a {
+    border-bottom: 1px #928f8fb7 solid ;
+}
+.main .link ul li  a:hover {
+    padding-left: 40px;
+} 
+table tr td img{
+    width: 100px;
+} 
+.main_page{
+    background-color: #165baa;
+    color:white;
+    height: 620px;
+    position: relative;
+    z-index: -1;
+    top: -10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+.ads .table{
+    overflow-x: auto;
+} 
+.ads table  {
+    width: 1290px;
+    text-align: center;
+    border-bottom: #0879e2 solid 2px ;    
+    overflow-x: auto;
+}
+.ads table thead {
+    background-color: #0879e2;
+    color: white;
+    height: 40px;
+}
+.ads table td {
+    background-color: #eee;
+    width: 100px;
+    height: 100px;
+}
+.ads table td img{
+    width: 40%;
+}
+.ads table td div{
+    display: flex;
+    justify-content: space-between;
+}
+.ads table td button{
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+.add{
+    margin-bottom: 20px;
+}
+.add button{
+    border: none;
+    padding: 15px 30px;
+    background-color: #0879e2;
+    color:white;
+    border-radius: 30px;
+}
+.add button:hover{
+    background-color: white;
+    color:#0879e2;
+    box-shadow: 1px 1px 13px 0px #0879e2;
+}
+
+/* Start rating */
+.rating {
+    height: 700px;
+    margin-top: 90px;
+}
+.rating .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 60px;
+}
+
+.rating .container .content {
+    background-color: white;
+    box-shadow: 1px 1px 10px 0px #777;
+    display: block;
+    transition: .3s;
+}
+
+.rating .container .content:hover {
+    /* transform: translateY(-20px); */
+        transform: translate3D(0,-1px,0) scale(1.03); /* move up slightly and zoom in */
+        box-shadow: 8px 28px 50px rgba(39,44,49,.07), 1px 6px 12px rgba(39,44,49,.04);
+        transition: all .4s ease; /* zoom in */
+        cursor: pointer;
+}
+
+.rating .container .content:hover i {
+    animation: icon .5s linear infinite
+}
+
+.rating .container .content img {
+    width: 100%;
+}
+
+.rating .container .content p,
+.rating .container .content div,
+.rating .container .content h3 {
+    padding: 6px 20px;
+}
+
+.rating .container .content h3 {
+    font-size: 23px;
+    margin: 15px 0px;
+}
+.rating .container .content div {
+    font-size: 20px;
+    color: var(--main_color);
+    border-top: 1px solid #7777778c;
+    color:#373636;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.rating .container .content div button{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+/* End rating*/
+/* Start employee  */
+.employee  .container {
+    margin-top: 150px;
+    margin-bottom: 100px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 50px;
+}
+
+.employee  .container .image {
+    display: flex;
+    gap: 20px;
+}
+
+.employee  .container .content {
+    position: relative;
+    margin-bottom: 100px;
+}
+
+.employee .container .content::after,
+.employee  .container .content::before {
+    content: "";
+    height: 115%;
+    position: absolute;
+    right: 0px;
+    top: -50px;
+    border-radius: 10px;
+    z-index: -2;
+}
+
+.employee  .container .content::after {
+    width: 80%;
+    background-color: #f3f3f3;
+}
+
+.employee  .container .content::before {
+    width: 0%;
+    background-color: #e4e4e4;
+    z-index: -1;
+    transition: .3s;
+}
+
+.employee  .container .content:hover:before {
+    width: 80%;
+}
+
+.employee  .container .content:hover .text h2 {
+    color: #818181;
+}
+
+.employee  .container .content:hover .image img {
+    filter: grayscale(100%);
+}
+
+.employee  .container .image .icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.employee  .container .image img {
+    border-radius: 10px;
+    width: 280px;
+}
+
+.employee  .container .image .icon a {
+    color: #777;
+    font-size: 30px;
+    padding-bottom: 20px;
+}
+
+.employee  .container .image .icon a:hover {
+    color: #03a9f4;
+}
+
+.employee  .container .content .text {
+    margin-left: 90px;
+}
+
+.employee  .container .content .text h2 {
+    font-size: 30px;
+    color: #03a9f4;
+    padding-right: 20px;
+}
+
+.employee  .container .content .text p {
+    font-size: 20px;
+    padding-right: 20px;
+}
+.employee  .container .content .text div{
+    display: flex;
+    justify-content: space-between;
+    padding-right:20px ;
+}
+.employee  .container .content .text button {
+    background-color: transparent;
+    border: none;
+    font-size: 19px;
+    cursor: pointer;
+}
+/* End employee */
+
+
+#submit-btn {
+    background-color: white;
+    border: none;
+    
+}
